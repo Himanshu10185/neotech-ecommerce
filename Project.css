@@ -1,0 +1,200 @@
+/* --- GLOBAL RESET & BASE STYLES --- */
+* { 
+    margin: 0;              /* Removes default browser margins */
+    padding: 0;             /* Removes default browser padding */
+    box-sizing: border-box; /* Includes padding/border in the element's total width/height */
+    font-family: 'Poppins', sans-serif; 
+}
+
+body { 
+    /* Creates a dark, circular glow effect starting from the center */
+    background: radial-gradient(circle at center, darkslategrey 0%, black 100%);
+    color: white;
+    min-height: 100vh;      /* Ensures background covers the full viewport height */
+    transition: margin-right 0.5s; /* Smoothly shifts content when the cart sidebar opens */
+    overflow-x: hidden;     /* Prevents accidental horizontal scrolling */
+}
+
+/* --- NAVIGATION BAR --- */
+.navbar {
+    display: flex; 
+    justify-content: space-between; /* Spaces out logo and cart trigger */
+    align-items: center;            /* Vertically centers items */
+    background: rgba(0, 0, 0, 0.85); /* Semi-transparent black */
+    padding: 20px 8%;
+    position: sticky;               /* Keeps navbar at the top while scrolling */
+    top: 0; 
+    z-index: 100;                   /* Keeps navbar above other content */
+    border-bottom: 1px solid cyan;
+    backdrop-filter: blur(10px);    /* Blurs the content visible behind the navbar */
+}
+
+.logo { 
+    font-size: 24px; 
+    font-weight: bold; 
+    color: cyan; 
+    text-shadow: 0 0 10px cyan;     /* Gives the text a neon glow */
+}
+
+/* --- CART TRIGGER BUTTON --- */
+.cart-trigger {
+    background: linear-gradient(45deg, cyan, deepskyblue);
+    padding: 10px 25px; 
+    border-radius: 30px;
+    cursor: pointer; 
+    font-weight: bold; 
+    color: white; 
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    transition: 0.3s;
+}
+
+.cart-trigger:hover { 
+    transform: translateY(-3px);    /* Subtle lift effect on hover */
+    box-shadow: 0 0 15px cyan; 
+}
+
+/* --- SIDEBAR CART --- */
+.sidebar-cart {
+    height: 100%; 
+    width: 0;                       /* Start closed (controlled by JS) */
+    position: fixed;                /* Sticks to the viewport */
+    z-index: 200;                   /* Highest layer to overlap everything */
+    top: 0; 
+    right: 0;                       /* Pins it to the right side */
+    background: rgb(15, 15, 15);
+    transition: 0.5s;               /* Smooth sliding animation speed */
+    padding-top: 60px;
+    border-left: 2px solid cyan;
+}
+
+.close-btn {
+    position: absolute;             /* Positions relative to the sidebar container */
+    top: 20px; 
+    left: 20px;
+    font-size: 30px; 
+    cursor: pointer; 
+    color: cyan; 
+    background: none; 
+    border: none;
+}
+
+.cart-content { padding: 30px; }
+
+/* Styles for individual items inside the cart list */
+.cart-item {
+    display: flex; 
+    justify-content: space-between; 
+    padding: 15px 0;
+    border-bottom: 1px solid rgb(50, 50, 50);
+}
+
+.checkout-btn {
+    margin-top:20px; 
+    background: cyan; 
+    color: black; 
+    border: none; 
+    padding: 15px 40px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover {
+    background: white;
+    box-shadow: 0 0 15px white;
+}
+
+/* --- FILTER BUTTONS --- */
+.filter-container { 
+    display: flex; 
+    justify-content: center; 
+    gap: 15px; 
+    margin: 40px 0; 
+}
+
+.filter-btn {
+    background: transparent; 
+    border: 1px solid cyan; 
+    color: cyan;
+    padding: 10px 30px; 
+    border-radius: 50px; 
+    cursor: pointer;
+    font-weight: bold; 
+    transition: 0.4s;
+}
+
+/* Styles for when a filter is active or hovered */
+.filter-btn.active, .filter-btn:hover {
+    background: cyan; 
+    color: black; 
+    box-shadow: 0 0 10px cyan;
+}
+
+/* --- PRODUCT GRID & CARDS --- */
+.container { 
+    max-width: 1200px; 
+    margin: auto;                   /* Centers the container horizontally */
+    padding: 20px; 
+}
+
+.product-grid { 
+    display: grid; 
+    /* Automatically fits columns based on screen size (responsive) */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+    gap: 30px; 
+}
+
+.card { 
+    background: rgba(255, 255, 255, 0.05); /* Very slight white tint */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px; 
+    border-radius: 20px; 
+    text-align: center;
+    transition: 0.4s; 
+}
+
+.card:hover { 
+    background: rgba(255, 255, 255, 0.1);
+    border-color: cyan; 
+    transform: translateY(-10px);   /* Pops out the card on hover */
+    box-shadow: 0 0 10px cyan;
+}
+
+.card img { 
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover;              /* Prevents image distortion */
+    border-radius: 15px; 
+    margin-bottom: 20px; 
+}
+
+.price { 
+    font-size: 1.4rem; 
+    color: cyan; 
+    font-weight: bold; 
+    margin-bottom: 15px; 
+    display: block; 
+}
+
+.buy-btn {
+    background: white; 
+    color: black; 
+    border: none; 
+    padding: 12px;
+    width: 100%; 
+    cursor: pointer; 
+    border-radius: 10px; 
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.buy-btn:hover { 
+    background: cyan; 
+    color: white; 
+    box-shadow: 0 0 5px cyan;
+}
+
+/* Used by JavaScript to hide products not in the selected category */
+.hidden { display: none; }
